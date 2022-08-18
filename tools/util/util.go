@@ -13,13 +13,14 @@ func GenUUID() string {
 	uuidFunc := uuid.NewV4()
 	uuidStr := uuidFunc.String()
 	uuidStr = strings.Replace(uuidStr, "-", "", -1)
-	uuidByt := []rune(uuidStr)
-	return string(uuidByt[8:24])
+	return uuidStr
+	//uuidByt := []rune(uuidStr)
+	//return string(uuidByt[8:24])
 }
 
 //对称加密IP和端口，当做clientId
 func GenClientId() string {
-	raw := []byte(setting.GlobalSetting.LocalHost + ":" + setting.CommonSetting.RPCPort)
+	raw := []byte(setting.GlobalSetting.LocalHost + ":" + setting.CommonSetting.RPCPort + ":" + GenUUID())
 	str, err := crypto.Encrypt(raw, []byte(setting.CommonSetting.CryptoKey))
 	if err != nil {
 		panic(err)
@@ -28,14 +29,15 @@ func GenClientId() string {
 	return str
 }
 
-//解析redis的地址格式
-func ParseRedisAddrValue(redisValue string) (host string, port string, err error) {
-	if redisValue == "" {
+//得到IP和端口
+//sanMaoHaoString 上面22行代码
+func GetHostAndPortFromPlainClientIdString(sanMaoHaoString string) (host string, port string, err error) {
+	if sanMaoHaoString == "" {
 		err = errors.New("解析地址错误")
 		return
 	}
-	addr := strings.Split(redisValue, ":")
-	if len(addr) != 2 {
+	addr := strings.Split(sanMaoHaoString, ":")
+	if len(addr) < 2 {
 		err = errors.New("解析地址错误")
 		return
 	}
@@ -62,7 +64,7 @@ func GetAddrInfoAndIsLocal(clientId string) (addr string, host string, port stri
 		return
 	}
 
-	host, port, err = ParseRedisAddrValue(addr)
+	host, port, err = GetHostAndPortFromPlainClientIdString(addr)
 	if err != nil {
 		return
 	}
