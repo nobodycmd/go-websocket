@@ -31,7 +31,8 @@ type RetData struct {
 }
 
 // 心跳间隔
-var heartbeatInterval = 25 * time.Second
+//var heartbeatInterval = 25 * time.Second
+var heartbeatInterval = 5 * time.Second
 
 func init() {
 	ToClientChan = make(chan clientInfo, 1000)
@@ -235,16 +236,21 @@ func Render(conn *websocket.Conn, messageId string, sendUserId string, code int,
 
 //启动定时器进行心跳检测
 func PingTimer() {
+	//fmt.Println("ping timer")
 	go func() {
 		ticker := time.NewTicker(heartbeatInterval)
 		defer ticker.Stop()
 		for {
-			<-ticker.C
-			//发送心跳
-			for clientId, conn := range Manager.AllClient() {
-				if err := conn.Socket.WriteControl(websocket.PingMessage, []byte{}, time.Now().Add(time.Second)); err != nil {
-					Manager.DisConnect <- conn
-					log.Errorf("发送心跳失败: %s 总连接数：%d", clientId, Manager.Count())
+			select {
+			case <-ticker.C:
+				//fmt.Println("send ping")
+				//发送心跳
+				for clientId, conn := range Manager.AllClient() {
+					//fmt.Println("clientid is ", clientId)
+					if err := conn.Socket.WriteControl(websocket.PingMessage, []byte{}, time.Now().Add(time.Second)); err != nil {
+						Manager.DisConnect <- conn
+						log.Errorf("发送心跳失败: %s 总连接数：%d", clientId, Manager.Count())
+					}
 				}
 			}
 		}
