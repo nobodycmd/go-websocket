@@ -16,7 +16,7 @@ func AccessTokenMiddleware(next http.HandlerFunc) http.HandlerFunc {
 			w.WriteHeader(http.StatusMethodNotAllowed)
 			return
 		}
-
+		
 		//检查header是否设置SystemId
 		systemId := r.Header.Get("SystemId")
 		if len(systemId) == 0 {

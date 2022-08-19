@@ -23,12 +23,11 @@ type clientInfo struct {
 }
 
 type RetData struct {
-	MessageId  string `json:"messageId"`
-	SendUserId string `json:"sendUserId,omitempty"`
-	Code       int    `json:"code"`
-	//Msg        string      `json:"msg"`
-	Msg  string      `json:"type"`
-	Data interface{} `json:"data"`
+	MessageId  string      `json:"messageId"`
+	SendUserId string      `json:"sendUserId,omitempty"`
+	Code       int         `json:"code"`
+	Msg        string      `json:"msg"`
+	Data       interface{} `json:"data"`
 }
 
 // 心跳间隔

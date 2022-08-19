@@ -7,6 +7,7 @@ import (
 	"github.com/woodylan/go-websocket/define/retcode"
 	"github.com/woodylan/go-websocket/tools/util"
 	"net/http"
+	"strings"
 )
 
 const (
@@ -25,8 +26,12 @@ func (c *Controller) Run(w http.ResponseWriter, r *http.Request) {
 	conn, err := (&websocket.Upgrader{
 		ReadBufferSize:  1024,
 		WriteBufferSize: 1024,
-		// 允许所有CORS跨域请求
+		// 是否允许CORS跨域请求
 		CheckOrigin: func(r *http.Request) bool {
+			refDomain := r.Referer()
+			if len(refDomain) > 0 && !strings.Contains(refDomain, r.Host) {
+				return false
+			}
 			return true
 		},
 	}).Upgrade(w, r, nil)
@@ -52,6 +57,13 @@ func (c *Controller) Run(w http.ResponseWriter, r *http.Request) {
 	clientSocket := NewClient(clientId, systemId, conn)
 
 	Manager.AddClient2SystemClient(systemId, clientSocket)
+
+	//加入节点组
+	q := r.URL.Query()
+	if q.Has("node") {
+		//clientSocket.GroupList = []string{"nodes"}
+		Manager.addClient2Group("nodes", clientSocket)
+	}
 
 	//读取客户端消息
 	clientSocket.Read()
