@@ -22,7 +22,7 @@ type RetData struct {
 func ConnRender(conn *websocket.Conn, data interface{}) (err error) {
 	err = conn.WriteJSON(RetData{
 		Code: retcode.SUCCESS,
-		Msg:  "success",
+		Msg:  "connect",
 		Data: data,
 	})
 

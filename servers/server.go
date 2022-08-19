@@ -23,19 +23,19 @@ type clientInfo struct {
 }
 
 type RetData struct {
-	MessageId  string      `json:"messageId"`
-	SendUserId string      `json:"sendUserId"`
-	Code       int         `json:"code"`
-	Msg        string      `json:"msg"`
-	Data       interface{} `json:"data"`
+	MessageId  string `json:"messageId"`
+	SendUserId string `json:"sendUserId,omitempty"`
+	Code       int    `json:"code"`
+	//Msg        string      `json:"msg"`
+	Msg  string      `json:"type"`
+	Data interface{} `json:"data"`
 }
 
 // 心跳间隔
-//var heartbeatInterval = 25 * time.Second
-var heartbeatInterval = 5 * time.Second
+var heartbeatInterval = 25 * time.Second
 
 func init() {
-	ToClientChan = make(chan clientInfo, 1000)
+	ToClientChan = make(chan clientInfo, 10000)
 }
 
 var Manager = NewClientManager() // 管理者
@@ -226,11 +226,11 @@ func WriteMessage() {
 
 func Render(conn *websocket.Conn, messageId string, sendUserId string, code int, message string, data interface{}) error {
 	return conn.WriteJSON(RetData{
-		Code:       code,
-		MessageId:  messageId,
-		SendUserId: sendUserId,
-		Msg:        message,
-		Data:       data,
+		Code:      code,
+		MessageId: messageId,
+		//SendUserId: sendUserId,
+		Msg:  message,
+		Data: data,
 	})
 }
 
@@ -241,18 +241,17 @@ func PingTimer() {
 		ticker := time.NewTicker(heartbeatInterval)
 		defer ticker.Stop()
 		for {
-			select {
-			case <-ticker.C:
-				//fmt.Println("send ping")
-				//发送心跳
-				for clientId, conn := range Manager.AllClient() {
-					//fmt.Println("clientid is ", clientId)
-					if err := conn.Socket.WriteControl(websocket.PingMessage, []byte{}, time.Now().Add(time.Second)); err != nil {
-						Manager.DisConnect <- conn
-						log.Errorf("发送心跳失败: %s 总连接数：%d", clientId, Manager.Count())
-					}
+			<-ticker.C
+			//fmt.Println("send ping")
+			//发送心跳
+			for clientId, conn := range Manager.AllClient() {
+				//fmt.Println("clientid is ", clientId)
+				if err := conn.Socket.WriteControl(websocket.PingMessage, []byte{}, time.Now().Add(time.Second)); err != nil {
+					Manager.DisConnect <- conn
+					log.Errorf("发送心跳失败: %s 总连接数：%d", clientId, Manager.Count())
 				}
 			}
+
 		}
 
 	}()

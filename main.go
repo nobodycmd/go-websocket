@@ -32,7 +32,10 @@ func main() {
 	servers.PingTimer()
 
 	fmt.Printf("服务器启动成功，端口号：%s\n", setting.CommonSetting.HttpPort)
-
+	//
+	//if err := http.ListenAndServe("http://0.0.0.0:"+setting.CommonSetting.HttpPort, nil); err != nil {
+	//	panic(err)
+	//}
 	if err := http.ListenAndServe(":"+setting.CommonSetting.HttpPort, nil); err != nil {
 		panic(err)
 	}
