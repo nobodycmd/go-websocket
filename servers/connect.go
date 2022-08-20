@@ -73,12 +73,6 @@ func (c *Controller) Run(w http.ResponseWriter, r *http.Request) {
 
 	Manager.AddClient2SystemClient(systemId, clientSocket)
 
-	//加入节点组
-	q := r.URL.Query()
-	if q.Has("node") {
-		AddClient2Group(systemId, "nodes", clientId, clientSocket.UserId, clientSocket.Extend)
-	}
-
 	//读取客户端消息
 	clientSocket.Read()
 
