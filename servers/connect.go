@@ -76,8 +76,7 @@ func (c *Controller) Run(w http.ResponseWriter, r *http.Request) {
 	//加入节点组
 	q := r.URL.Query()
 	if q.Has("node") {
-		//clientSocket.GroupList = []string{"nodes"}
-		Manager.AddClient2LocalGroup("nodes", clientSocket, "", "")
+		AddClient2Group(systemId, "nodes", clientId, clientSocket.UserId, clientSocket.Extend)
 	}
 
 	//读取客户端消息
