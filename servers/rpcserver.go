@@ -3,9 +3,9 @@ package servers
 import (
 	"context"
 	log "github.com/sirupsen/logrus"
-	"github.com/woodylan/go-websocket/pkg/setting"
-	"github.com/woodylan/go-websocket/servers/pb"
-	"github.com/woodylan/go-websocket/tools/util"
+	"gowebsocket/pkg/setting"
+	"gowebsocket/servers/pb"
+	"gowebsocket/tools/util"
 	"google.golang.org/grpc"
 	"net"
 )

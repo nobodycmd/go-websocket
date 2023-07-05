@@ -3,8 +3,8 @@ package servers
 import (
 	"github.com/gorilla/websocket"
 	. "github.com/smartystreets/goconvey/convey"
-	"github.com/woodylan/go-websocket/pkg/setting"
-	"github.com/woodylan/go-websocket/tools/util"
+	"gowebsocket/pkg/setting"
+	"gowebsocket/tools/util"
 	"testing"
 )
 

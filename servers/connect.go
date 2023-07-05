@@ -3,9 +3,9 @@ package servers
 import (
 	"github.com/gorilla/websocket"
 	log "github.com/sirupsen/logrus"
-	"github.com/woodylan/go-websocket/api"
-	"github.com/woodylan/go-websocket/define/retcode"
-	"github.com/woodylan/go-websocket/tools/util"
+	"gowebsocket/api"
+	"gowebsocket/define/retcode"
+	"gowebsocket/tools/util"
 	"net/http"
 	"strings"
 )

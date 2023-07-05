@@ -3,8 +3,8 @@ package util
 import (
 	"errors"
 	uuid "github.com/satori/go.uuid"
-	"github.com/woodylan/go-websocket/pkg/setting"
-	"github.com/woodylan/go-websocket/tools/crypto"
+	"gowebsocket/pkg/setting"
+	"gowebsocket/tools/crypto"
 	"strings"
 )
 

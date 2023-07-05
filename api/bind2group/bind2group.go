@@ -2,9 +2,9 @@ package bind2group
 
 import (
 	"encoding/json"
-	"github.com/woodylan/go-websocket/api"
-	"github.com/woodylan/go-websocket/define/retcode"
-	"github.com/woodylan/go-websocket/servers"
+	"gowebsocket/api"
+	"gowebsocket/define/retcode"
+	"gowebsocket/servers"
 	"net/http"
 )
 

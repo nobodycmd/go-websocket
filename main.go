@@ -2,13 +2,13 @@ package main
 
 import (
 	"fmt"
-	"github.com/woodylan/go-websocket/define"
-	"github.com/woodylan/go-websocket/pkg/etcd"
-	"github.com/woodylan/go-websocket/pkg/setting"
-	"github.com/woodylan/go-websocket/routers"
-	"github.com/woodylan/go-websocket/servers"
-	"github.com/woodylan/go-websocket/tools/log"
-	"github.com/woodylan/go-websocket/tools/util"
+	"gowebsocket/define"
+	"gowebsocket/pkg/etcd"
+	"gowebsocket/pkg/setting"
+	"gowebsocket/routers"
+	"gowebsocket/servers"
+	"gowebsocket/tools/log"
+	"gowebsocket/tools/util"
 	"net"
 	"net/http"
 )

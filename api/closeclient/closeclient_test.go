@@ -3,7 +3,7 @@ package closeclient
 import (
 	"encoding/json"
 	. "github.com/smartystreets/goconvey/convey"
-	"github.com/woodylan/go-websocket/pkg/setting"
+	"gowebsocket/pkg/setting"
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"

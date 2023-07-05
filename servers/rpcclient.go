@@ -3,8 +3,8 @@ package servers
 import (
 	"context"
 	log "github.com/sirupsen/logrus"
-	"github.com/woodylan/go-websocket/pkg/setting"
-	"github.com/woodylan/go-websocket/servers/pb"
+	"gowebsocket/pkg/setting"
+	"gowebsocket/servers/pb"
 	"google.golang.org/grpc"
 	"sync"
 )

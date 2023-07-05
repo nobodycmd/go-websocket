@@ -4,9 +4,9 @@ import (
 	"encoding/json"
 	"errors"
 	log "github.com/sirupsen/logrus"
-	"github.com/woodylan/go-websocket/define/retcode"
-	"github.com/woodylan/go-websocket/pkg/setting"
-	"github.com/woodylan/go-websocket/tools/util"
+	"gowebsocket/define/retcode"
+	"gowebsocket/pkg/setting"
+	"gowebsocket/tools/util"
 	"sync"
 	"time"
 )

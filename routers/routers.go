@@ -1,14 +1,14 @@
 package routers
 
 import (
-	"github.com/woodylan/go-websocket/api/bind2group"
-	"github.com/woodylan/go-websocket/api/closeclient"
-	"github.com/woodylan/go-websocket/api/getonlinelist"
-	"github.com/woodylan/go-websocket/api/register"
-	"github.com/woodylan/go-websocket/api/send2client"
-	"github.com/woodylan/go-websocket/api/send2clients"
-	"github.com/woodylan/go-websocket/api/send2group"
-	"github.com/woodylan/go-websocket/servers"
+	"gowebsocket/api/bind2group"
+	"gowebsocket/api/closeclient"
+	"gowebsocket/api/getonlinelist"
+	"gowebsocket/api/register"
+	"gowebsocket/api/send2client"
+	"gowebsocket/api/send2clients"
+	"gowebsocket/api/send2group"
+	"gowebsocket/servers"
 	"net/http"
 )
 

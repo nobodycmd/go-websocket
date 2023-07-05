@@ -6,7 +6,7 @@ import (
 	ut "github.com/go-playground/universal-translator"
 	"github.com/gorilla/websocket"
 	"github.com/pkg/errors"
-	"github.com/woodylan/go-websocket/define/retcode"
+	"gowebsocket/define/retcode"
 	"gopkg.in/go-playground/validator.v9"
 	zh2 "gopkg.in/go-playground/validator.v9/translations/zh"
 	"io"
